@@ -1,0 +1,5 @@
+.seachBtn{ width: 100px; float: left; margin-left: 35px;}
+.seachBtn .btn{ width: 150px; }
+.userId{width: 400px; float: left;}
+.userName{width: 400px; float: left;}
+.roleSel{float: right; width: 200px;}

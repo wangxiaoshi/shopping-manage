@@ -1,0 +1,104 @@
+define(function (require, exports, module) {
+    var template = _template;
+    var list = require('./premissionlist.js');
+
+    exports.render = function (params, layout, service) {
+        var premissionRender = require('./premissionRender.js');
+        var groupList = require('./groupList.js');
+
+        var content = $('<div class="content"></div>');
+        var row = template.row('3/9');
+
+        // 权限组
+        var group = template.basic({ title: '权限组' });
+        group.html.addClass('premissionGroupList');
+        row.item[0].append(group.html);
+
+
+        // 添加按钮
+        var addbutton = $('<button class="btn btn-box-tool btn-default btn-sm" style="margin:0 0 0 5px;"><i class="glyphicon glyphicon-plus"></i> 添加权限组</button>');
+        group.headerButtonBox.append(addbutton);
+
+
+        // 右侧列表
+        var premission = template.basic({ title: '权限列表' });
+        row.item[1].append(premission.html);
+        // premission.body.append(premissionRender.render(list.get()));
+
+        var premissionObj = null;
+
+        // 右侧权限列表赋值操作
+        // premissionRender.set([1, 2, 3, 4, 5, 10]);
+
+        // 界面渲染
+        var height = $(window).height();
+        group.body.css('height', height - 227);
+        premission.body.css('height', height - 227);
+        var save = $('<div class="btn btn-default btn-success" style="display:none"><i class="fa fa-save"></i> 保 存 </div>');
+        // 渲染保存按钮
+
+
+        var closeAll = $('<button class="btn btn-box-tool btn-default btn-sm" style="margin:0 0 0 5px;display:none"><i class="fa fa-plus-square-o"></i>&nbsp;&nbsp;全部收齐</button>');
+        closeAll.click(function () {
+            premissionRender.closeAll();
+        });
+
+        var openAll = $('<button class="btn btn-box-tool btn-default btn-sm" style="margin:0 0 0 5px;display:none"><i class="fa fa-minus-square-o"></i>&nbsp;&nbsp;全部展开</button>');
+        openAll.click(function () {
+            premissionRender.openAll();
+        });
+        premission.headerButtonBox.append(closeAll).append(openAll);
+
+        // 左侧列表渲染
+        groupList.render(group.body, save, premissionRender, {
+            delete: function (data, callback) {
+                // data 删除对象的原数据
+                callback(false);
+            },
+            editor: function (inputValue, data, callback) {
+                // inputValue 修改后的字符串
+                // data 修改前的原对象
+                callback();
+            },
+            creat: function (name, callback) {
+                callback({
+                    name: name,
+                    id: 2
+                });
+            },
+            active: function (data, callback) {
+                if (premissionObj) {
+                    premissionObj.set(data.value)
+                } else {
+                    premission.body.append(premissionRender.render(list.get()));
+                    premissionObj = premissionRender;
+                    premissionObj.set(data.value);
+                    save.css('display', 'inline-block');
+                    closeAll.css('display', 'inline-block');
+                    openAll.css('display', 'inline-block');
+                    premission.body.css('height', height - 200);
+                    premission.footer(save);
+                };
+                callback();
+            },
+            save: function (newData, oldData, callback) {
+                console.log(newData, oldData);
+                callback();
+            }
+        });
+        // 左侧列表赋值操作
+        groupList.set([
+            { name: '角色1', id: '1', value: [1, 2, 3, 4, 5, 10] },
+            { name: '角色2', id: '2', value: [3,7,9] },
+            { name: '角色3', id: '3', value: [1,2,3] },
+            { name: '角色4', id: '4', value: [1,7] },
+            { name: '角色5', id: '5', value: [4,8,10] },
+        ]);
+        // 绑定添加事件
+        addbutton.click(() => {
+            groupList.add();
+        });
+        content.append(row.html.addClass('premissionGroup'));
+        layout.append(content);
+    }
+});

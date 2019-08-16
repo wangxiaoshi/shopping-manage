@@ -1,0 +1,48 @@
+
+body,html { background-color: #fafafa; min-height: 100%;}
+a {text-decoration: none;}
+a:active, a:hover {outline: 0;text-decoration: none;}
+a:focus{text-decoration:none;}
+a:visited{text-decoration:none;}
+
+.header { position: fixed; background-color:#1f87e6; top: 0px; z-index: 40; left: 0px; width: 100%; height: 60px; box-shadow: 1px 0px 20px rgba(0,0,0,0.08); }
+.header .logo { line-height: 60px; font-size: 35px; color: #fff; text-align: center; width: 230px; float: left;}
+.header .logout {float: right;color: #ddd; width: 150px; font-size: 18px; text-align: center; line-height: 60px; cursor: pointer; }
+.header .logout i { margin: 0 10px 0 0;}
+.header .logout:hover { color: #fff;}
+
+.nav { position: fixed; user-select: none; padding: 20px 0 200px 0; overflow-y: auto; top: 60px; z-index: 39; left: 0px; width: 230px; bottom: 0px; box-shadow: 1px 0px 20px rgba(0,0,0,0.08); background: #252932; }
+
+.nav::-webkit-scrollbar {width: 4px;height: 4px;background-color: #F5F5F5;}
+/*定义滚动条轨道 内阴影+圆角*/
+.nav::-webkit-scrollbar-track {box-shadow: inset 0 0 6px rgba(0,0,0,0.3);border-radius: 10px;background-color: #F5F5F5;}
+/*定义滑块 内阴影+圆角*/
+.nav::-webkit-scrollbar-thumb{border-radius: 10px;box-shadow: inset 0 0 6px rgba(0,0,0,.3);background-color: #555;}
+
+.nav ul,.nav li{ padding:0;margin:0;list-style:none}
+.nav .nav_item { padding: 5px 10px;}
+.nav .nav_item >a { padding: 15px 5px 15px 15px; display: block; color: #6a7384; position: relative; }
+.nav .nav_item >a>.fa {padding-left: 5px; margin-right: 10px; font-size: 18px;  }
+.nav .nav_item >a>.pull-right-container { position: absolute; right: 10px; top: 50%; margin-top: -7px; }
+.nav .nav_item >a>.pull-right-container >.fa-angle-right { margin-right: 10px; transition: transform .5s ease;}
+.nav .nav_item:hover >a {color: #fff; border-radius: 5px;}
+.nav .nav_item.active >a {color: #fff; background: #1f87e6; border-radius: 5px;}
+.nav .nav_item.active >a>.pull-right-container >.fa-angle-right  { transform: rotate(90deg);}
+.nav .subList { font-size: 13px; display: none;  }
+.nav .subList a { color: #6a7384; display: block; padding: 8px 5px 8px 25px;}
+
+.nav .subList a>.fa {padding-left: 5px; margin-right: 10px; font-size: 14px;  }
+.nav .subList li:hover a {color: #fff}
+.nav .subList li.active a {color: #fff}
+.nav .nav-small-cap { padding: 20px 25px 10px 15px; font-size: 12px; font-weight: 500; color: #687384;}
+
+/* .nav .nav_item.active .subList { display: block !important;} */
+
+.wrapper { min-height: 100%; overflow-x: hidden; }
+.wrapper.with_content { padding: 70px 10px 70px 240px;}
+
+.footer { border-top: 1px solid #d2d6de; height: 50px; line-height: 50px; margin: -50px 0 0 230px; padding: 0 15px; background: #fff; color: #455a64;}
+
+.table.center th,.table.center tr ,.table.center td  { text-align: center; }
+
+/* margin-right: 10px; */

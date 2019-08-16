@@ -1,0 +1,12 @@
+.premissionGroup .form_checkBox_Item .form_checkBox_name { float: none; display: inline-block;}
+.premissionGroup .form_checkBox_Item {display: block;}
+.premissionGroup .GroupBody {padding:  0 0 0 35px}
+.premissionGroup .GroupTitle i { float: left; cursor: pointer; display: block; width: 20px; height: 35px; line-height: 35px; }
+
+
+.premissionGroupList .groupItem { border: 1px solid #ccc; cursor: pointer; border-radius: 5px; padding:5px 12px; margin: 0 0 5px 0; line-height: 25px; }
+.premissionGroupList .groupItem .fa {float: right; height: 25px; line-height: 25px; font-size: 16px; margin: 0 0 0 5px; border-radius: 3px; padding: 0 5px}
+.premissionGroupList .groupItem.active { color: #fff; background: #1e88e5; border-color: #1e88e5 }
+
+
+
