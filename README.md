@@ -1,2 +1,5 @@
 # alpha_manage
-一个3D模型资源网站的后台管理系统
+>The background management system for a commercial 3D-model website.
+>Frontend used sea.js and bootstrap. And for backend I used springboot+mybatis+druid
+# Install
+>Just install with maven and run like normal springboot applications.
