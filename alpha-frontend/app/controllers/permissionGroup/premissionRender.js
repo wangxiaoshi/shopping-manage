@@ -70,6 +70,7 @@ define(function (require, exports, module) {
     };
     group.prototype.set = function (data) {
         this.clear();
+        // console.log("group.set收到data:" + data);
         // debugger;
         for (let i = 0; i < data.length; i++) {
             const element = data[i];

@@ -1,5 +1,8 @@
 define(function (require, exports, module) {
 
+    var index = require ('./index.js');
+    service = index.service;
+
     var _obj = {};
     var dialog = _dialog;
     var alert = _alert;
@@ -9,7 +12,7 @@ define(function (require, exports, module) {
         this.data = data;
         this.parent = parent;
         this.html = $(`<div class="groupItem">
-            <span class="name">`+ this.data.name + `</span>
+            <span class="name">`+ this.data.roleName + `</span>
             <span class="delete fa fa-remove" title="删除"></span> 
             <span class="editor fa fa-edit" title="修改"></span>
             <div style="clear:both;height:1px;width:100%"></div>
@@ -42,7 +45,7 @@ define(function (require, exports, module) {
                 },
             }]);
             form.setData({
-                string: this.data.name
+                string: this.data.roleName
             });
 
             dialog({
@@ -56,7 +59,7 @@ define(function (require, exports, module) {
                         var data = form.get();
                         if (data) {
                             var name = data.string
-                            if (name == this.data.name) {
+                            if (name == this.data.roleName) {
                                 alert.warning({
                                     text: '未进行任何修改',
                                     buttonColor: "#e28b3e",
@@ -65,7 +68,7 @@ define(function (require, exports, module) {
                             } else {
                                 this.event.editor(name, this.data, () => {
                                     event.hide();
-                                    this.data.name = name;
+                                    this.data.roleName = name;
                                     this.name.text(name);
                                 });
                             }
@@ -79,7 +82,7 @@ define(function (require, exports, module) {
             // e.preventDefault();
             e.stopPropagation();
             alert.delete({
-                title: '是否删除: ' + this.data.name,
+                title: '是否删除: ' + this.data.roleName,
                 text: '警告:您的删除操作将无法得到恢复',
                 callback: (successEvent, errorEvent) => {
                     this.event.delete(this.data, (error) => {
@@ -159,7 +162,7 @@ define(function (require, exports, module) {
             },
         }]);
         dialog({
-            title: '修改角色名称',
+            title: '添加角色名称',
             width: '600',
             height: '300',
             buttons: [{
@@ -167,6 +170,7 @@ define(function (require, exports, module) {
                 className: 'btn-info',
                 event: (event) => {
                     var data = form.get();
+                    console.log("提交表单时的data: " + data.string);
                     if (data) {
                         var name = data.string;
                         this.event.creat(name, (data) => {

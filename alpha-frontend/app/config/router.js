@@ -5,7 +5,7 @@ define(function (require, exports, module) {
             name: 'login',
             controller: 'login/index.js',
             layout: 'full',
-            service: [],
+            service: ['login'],
             nav: 'login',
             style: 'login/index.css',
             permission: 'index',
@@ -18,16 +18,6 @@ define(function (require, exports, module) {
             service: [],
             nav: 'index',
             style: 'index/index.css',
-            permission: 'index',
-        },
-        '/permission': {
-            title: '权限管理',
-            name: 'permission',
-            controller: 'permission/index.js',
-            layout: 'content',
-            service: [],
-            nav: 'permission',
-            style: 'permission/css/zTreeStyle/zTreeStyle.css',
             permission: 'index',
         },
         //---------------用户管理------------------
@@ -53,17 +43,7 @@ define(function (require, exports, module) {
             style: 'user/create/index.css',
             permission: 'user.create',
         },
-        //查看用户详情
-        '/user/detail': {
-            title: '用户详情',
-            name: 'user',
-            controller: 'user/detail/index.js',
-            layout: 'content',
-            service: ['user'],
-            nav: 'user',
-            style: 'user/detail/index.css',
-            permission: 'user.detail',
-        },
+        
         //---------------资源管理------------------
         //检索资源
         '/model/search': {
@@ -222,7 +202,7 @@ define(function (require, exports, module) {
             name: 'permission',
             controller: 'permissionGroup/index',
             layout: 'content',
-            service: [],
+            service: ['permission'],
             nav: 'permissionGroup',
             style: 'permissionGroup/index.css',
             permission: 'permissionGroup',

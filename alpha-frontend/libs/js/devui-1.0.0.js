@@ -1058,7 +1058,7 @@
                 var data = {};
                 var _name = $.extend(true, [], name);
                 var loop = function (_name) {
-                    if (_name.length == 0) {
+                    if (_name.length == 0) { 
                         callback(data);
                     } else {
                         var name = _name.shift();
@@ -1681,7 +1681,7 @@
                     } else {
                         var _this = this;
                         // this.options.default = data;
-                        if (dataType == 'string') {
+                        if (dataType == 'string' || dataType == 'number') {
                             this.clear().eachChild(function (clild) {
                                 if (data == clild.data[_this.options.setKey]) {
                                     _this.select(clild);
@@ -1853,7 +1853,7 @@
         this.pre = this.html.find('.form_calendar_pre');
         this.gotoToday = this.html.find('.form_calendar_today');
         this.next = this.html.find('.form_calendar_next');
-        for (var i = 2007; i < this.today.year + 10; i++) {
+        for (var i = this.today.year - 70; i < this.today.year; i++) {
             var yearItem = $('<div class="form_calendar_yearItem">' + i + '年</div>');
             (function (i, yearItem) {
                 yearItem.click(function () {
@@ -2800,7 +2800,7 @@
                         isComplete = true;
                     } else {
                         var _this = this;
-                        if (dataType == 'string') {
+                        if (dataType == 'string' || dataType == 'number') {
                             this.clear().eachChild(function (clild) {
                                 if (data == clild.data[_this.options.setKey]) {
                                     _this.select(clild);

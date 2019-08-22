@@ -41,9 +41,48 @@ define(function (require, exports, module) {
             },
         })
     }  
-    
-    var updateUser = function (data, callback) {
 
+    var updateUser = function (data, callback) {
+        request({
+            type: 'put',
+            data: data,
+            url: '/user',
+            devUrl: '202',
+            loading: true,
+            success: function (result) {
+                // console.log("service收到后端返回: " + result);
+                callback(result);
+            },
+        })
+    }
+
+    var deleteUser = function (data, callback) {
+        request({
+            type: 'delete',
+            data: data,
+            url: '/user/' + data,
+            devUrl: '202',
+            loading: true,
+            success: function (result) {
+                console.log("service收到后端返回: " + result);
+                callback(result);
+            },
+        })
+    }
+
+    var getUserBy = function (data, searchData, callback) {
+        console.log("前端service: " + searchData);
+        request({
+            type: 'post',
+            data: data,
+            url: '/user/list/' + searchData,//FIXME:
+            devUrl: '202',
+            loading: true,
+            success: function (result) {
+                console.log("service收到后端返回: " + result);
+                callback(result);
+            },
+        })
     }
 
     return function (requestObj) {
@@ -52,7 +91,11 @@ define(function (require, exports, module) {
             createUser: createUser, //创建用户
             getAllUser: getAllUser, //读取所有用户
             getUser: getUser, //读取指定用户
+            updateUser: updateUser, //更新用户
+            deleteUser: deleteUser, //删除用户
+            getUserBy:getUserBy,
         }
     }
+
 });
 

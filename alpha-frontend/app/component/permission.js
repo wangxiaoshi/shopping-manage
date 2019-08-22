@@ -1,40 +1,43 @@
 
 define(function (require, exports, module) {
     var alert = _alert;
+
+    //动态获取当前权限状态   FIXME: 在其他页面会出现ajax空参数错误
+    var getPermissionListByRoleID = function (data, callback) {
+        _request.POST({
+            type: 'POST',
+            url : '/role/permission/' + data,
+            data : data,
+            devUrl: '202',
+            loading : true,
+            success : function (res) {
+                callback(res);
+            },
+        })
+    }
+
+    //该表应与permissionGroup/premissionlist保持同步!!!
     var PerObject = {
         index: true,
         login: true, 
-        system: false,
-        permissionGroup: true,
+        permissionGroup: false,
         support: true,
         user: {
-            create: true,
-            editProfile: false,
-            changeUserRole: false,
-            editOccupation: false,
-            search: true,
-            detail: true,
+            create: false,
+            edit: false,
+            search: false,
+            delete: false,
         },
 
         model: {
             search: true,
             review: true,
-            encrypt: false,
-            comment: false,
-            commentReview: false,
-            commentReply: false, 
         },
         project: {
             search: true,
             bidding: true,
-            review: false,
-            publish: false,
-            followup: false,
-            contact: false,
-            turnover: false,
         },
         income: {
-            modelIncome: false,
             downloadIncome: true,
             projectIncome: true,
         },
@@ -48,19 +51,11 @@ define(function (require, exports, module) {
         contract: {
             create: true,
             search: true,
-            receivable: false,
-            arrange: false,
-            statement: false,
-            complete: false,
         },
         forum: {
             create: false,
             topic: true,
             post: true,
-            review: false,
-            comment: false,
-            commentReply: false,
-            commentReview: false,
         }
     };
 
@@ -121,6 +116,7 @@ define(function (require, exports, module) {
         }
     };
 
+
     return {
 
         // 拥有权限验证
@@ -155,131 +151,31 @@ define(function (require, exports, module) {
             // _Strage.set('PermissionRole', data);
         },
         initPermission: function (roleId) {
-            // if (roleId == '1') {
-            //     PerObject.system = true;
-            //     PerObject.company.creation = true;
-            //     PerObject.company.message = true;
-            //     PerObject.company.preserve = true;
-            //     PerObject.company.searching = true;                
-                
-            //     PerObject.order.createorder = true;
-            //     PerObject.order.followup = true;
-            //     PerObject.order.signing = true;
-            //     PerObject.order.turnover = true;
-                
-            //     PerObject.statistics.company = true;
-            //     PerObject.statistics.income = true;
-            //     PerObject.statistics.product = true;
-            //     PerObject.statistics.order = true;
-            //     PerObject.statistics.destine = true;
-            //     PerObject.statistics.turnover = true;
-            //     PerObject.statistics.complete = true;
-            //     PerObject.statistics.creation = true;
-            //     PerObject.statistics.underway = true;
-                
-                
-            //     PerObject.contract.create = true;
-            //     PerObject.contract.receivable = true;
-            //     PerObject.contract.arrange = true;
-            //     PerObject.contract.statement = true;
-                
-                             
-            // } else if(roleId == '2'){
-            //     PerObject.system = true;
-            //     PerObject.company.creation = true;
-            //     PerObject.company.message = true;
-            //     PerObject.company.preserve = true;
-            //     PerObject.company.searching = true;                
-                
-            //     PerObject.order.createorder = true;
-            //     PerObject.order.followup = true;
-            //     PerObject.order.signing = true;
-            //     PerObject.order.turnover = true;
-                
-            //     PerObject.statistics.company = true;
-            //     PerObject.statistics.income = true;
-            //     PerObject.statistics.product = true;
-            //     PerObject.statistics.order = true;
-            //     PerObject.statistics.destine = true;
-            //     PerObject.statistics.turnover = true;
-            //     PerObject.statistics.complete = true;
-            //     PerObject.statistics.creation = true;
-            //     PerObject.statistics.underway = true;
-                
-                
-            //     PerObject.contract.create = true;
-            //     PerObject.contract.receivable = true;
-            //     PerObject.contract.arrange = true;
-            //     PerObject.contract.statement = true;
-                
-                
-            // }else if(roleId == '3'){
-               
-            //     PerObject.company.creation = true;
-            //     PerObject.company.message = true;
-            //     PerObject.company.preserve = true;
-            //     PerObject.company.searching = true;
-                
-            //     PerObject.order.createorder = true;
-            //     PerObject.order.followup = true;
-            //     PerObject.order.signing = true;
-            //     PerObject.order.turnover = true;
-                
-            //     PerObject.statistics.company = true;
-            //     PerObject.statistics.income = true;
-            //     PerObject.statistics.product = true;
-            //     PerObject.statistics.order = true;
-            //     PerObject.statistics.destine = true;
-            //     PerObject.statistics.turnover = true;
-            //     PerObject.statistics.complete = true;
-            //     PerObject.statistics.creation = true;
-            //     PerObject.statistics.underway = true;
-                
-                
-            //     PerObject.contract.create = true;
-            //     PerObject.contract.receivable = true;
-            //     PerObject.contract.arrange = true;
-            //     PerObject.contract.statement = true;
-
-            // }else if(roleId == '4'){
-                
-            //     PerObject.contract.arrange = true;
-            //     PerObject.statistics.product = true;
-               
-            // }else if(roleId == '5'){
-               
-            //     PerObject.company.creation = true;
-            //     PerObject.company.message = true;
-            //     PerObject.company.preserve = true;
-            //     PerObject.company.searching = true;
-
-            //     PerObject.order.createorder = true;
-            //     PerObject.order.followup = true;
-
-            //     PerObject.statistics.company = true;
-            //     PerObject.statistics.product = true;
-            //     PerObject.statistics.order = true;
-
-            // }else {
-
-              
-            //     PerObject.company.creation = true;
-            //     PerObject.company.message = true;
-            //     PerObject.company.preserve = true;
-            //     PerObject.company.searching = true;
-                
-            //     PerObject.order.createorder = true;
-            //     PerObject.order.followup = true;
-
-            //     PerObject.statistics.company = true;
-            //     PerObject.statistics.product = true;
-            //     PerObject.statistics.order = true;
-
-
-
-            // }
+            // per = this.PerObject;
+            // console.log(per);
+            // console.log("权限初始化");
+            //实现动态获取该角色当前所持有权限
+            //通过ajax从后端获取角色权限列表, 经过整理对上面的前端权限赋值, 获取的列表序号参照permissionGroup/premissionlist
+            var newList = [];
+            getPermissionListByRoleID(roleId, function(res){
+                for (let index = 0; index < res.list.length; index++) {
+                    // console.log(res.list[index].permissionID);
+                    newList = newList.concat([res.list[index].permissionID]);
+                }
+                // console.log(newList);
+                //现在的list应该有着该用户持有角色对应permissionGroup/premissionlist的序号
+                PerObject.permissionGroup = (newList.indexOf(1) > -1);
+                PerObject.index = (newList.indexOf(3) > -1);
+                PerObject.user.create = (newList.indexOf(5) > -1);
+                PerObject.user.edit = (newList.indexOf(6) > -1);
+                PerObject.user.search = (newList.indexOf(7) > -1);
+                PerObject.user.delete = (newList.indexOf(8) > -1);
+                //TODO: 在这里给新的权限赋值!!!
+                return PerObject;
+                // console.log(PerObject);
+            });
+            // console.log(PerObject);
         }
     }
-    // Permission.check('contract');
 });
 

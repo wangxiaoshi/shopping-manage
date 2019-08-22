@@ -148,13 +148,18 @@ define(function (require, exports, module) {
         var html = '';
         html += '<div class="header">';
         html += '    <div class="logo">LOGO</div>';
-        html += '    <div class="logout"><i class="fa fa-sign-out"></i>退出登录</div>';
+        html += '    <div class="logout" id="logOutButton"><i class="fa fa-sign-out"></i>退出登录</div>';
         html += '</div>';
         html = $(html)
         html.find('.logout').click(function () {
             location.href = 'index.html#/login';
             _storage.clear();
         });
+
+        // var y = document.getElementById("logOutButton");
+        // if(!_storage.get('token')) {
+        //     y.innerHTML = "登录";
+        // }
         return html;
     };
 

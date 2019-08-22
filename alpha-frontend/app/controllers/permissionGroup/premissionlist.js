@@ -1,64 +1,52 @@
 define(function (require, exports, module) {
     var premission = [
         {
-            name: '用户管理权限',
+            name: '系统管理权限',
             list: [{
                 url: 'key1',
-                name: '检索用户',
+                name: '浏览权限',
                 setArray: [],
                 value: [1],
-            }, {
+            },{
                 url: 'key2',
-                name: '权限2',
+                name: '修改权限',
                 setArray: [],
                 value: [2],
-            }, {
+            },{
                 url: 'key3',
+                name: '进入主页',
                 setArray: [],
-                name: '权限3',
-                value: [3, 4],
-            }, {
+                value: [3],
+            },{
                 url: 'key4',
+                name: '登录系统',
                 setArray: [],
-                name: 'user manage',
-                value: [5, 6, 7],
-            }],
-        }, {
-            name: '资源管理权限',
+                value: [4],
+            },]
+        },
+        {
+            name: '用户管理权限',
             list: [{
                 url: 'key5',
-                name: '检索资源',
+                name: '创建用户',
                 setArray: [],
-                value: [8],
+                value: [5],
             }, {
                 url: 'key6',
-                name: '权限2',
+                name: '修改用户',
                 setArray: [],
-                value: [9],
+                value: [6],
             }, {
                 url: 'key7',
-                name: '权限3',
                 setArray: [],
-                value: [10, 11],
+                name: '浏览用户',
+                value: [7],
             }, {
                 url: 'key8',
-                name: '权限4',
                 setArray: [],
-                value: [12],
-            }],
-        },{
-            name: '统计管理权限',
-            list: [{
-                url: 'key9',
-                name: '用户统计',
-                setArray: [],
-                value: [13],
-            },{
-                url: 'key10',
-                name: '资源统计',
-                setArray: [],
-                value: [14],
-            }]
+                name: '删除用户',
+                value: [8],
+            },],
         },
     ];
 

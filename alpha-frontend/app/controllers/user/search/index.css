@@ -1,5 +1,6 @@
-.seachBtn{ width: 100px; float: left; margin-left: 35px;}
+.seachBtn{ width: 100px; float: left; margin-left: 20px;}
 .seachBtn .btn{ width: 150px; }
-.userId{width: 400px; float: left;}
-.userName{width: 400px; float: left;}
+/* .userId{width: 400px; float: left;} */
+.keyword{width: 500px; float: left;}
 .roleSel{float: right; width: 200px;}
+#submit {display: block;width: 25%;text-align: center;margin: auto;}

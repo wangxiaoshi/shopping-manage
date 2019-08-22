@@ -52,7 +52,7 @@ define (function (require, exports, module) {
         var option2 = {
             title : {
                 text: '用户类型',
-                //subtext: '纯属虚构',
+                subtext: '纯属虚构',
                 x:'center'
             },
             tooltip : {

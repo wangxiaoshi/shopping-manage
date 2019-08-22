@@ -2,11 +2,13 @@ define (function (require, exports, module) {
     // var _gender = require ('./gender.js')
     var _province = require ('./province.js')
 
+    // DevUI.options.set(service.getAllRole());
+
     exports.render = function (params, layout, service) {
         var content = $('<div id="content"></div>');
         
 
-        //创建一个新用户的表单 TODO: 生日年份
+        //创建一个新用户的表单, TODO:生日选单可以进一步封装
         var userForm = new DevUI.form({
             type: 'all'
         });
@@ -62,6 +64,23 @@ define (function (require, exports, module) {
                     placeholder: '请输入邮箱',
                 }
             },
+            //手机号
+            {
+                key: 'userPhone',
+                type: 'input',
+                box: {
+                    size: '3/6',
+                    lable: '电话:',                   
+                    className: '',
+                },
+                element: {
+                    verify: {
+                        text: '电话',
+                        rules: [],
+                    },
+                    placeholder: '请输入电话',
+                }
+            },
             //性别
             {
                 key: 'userGender',
@@ -86,23 +105,6 @@ define (function (require, exports, module) {
             },
             //职业
             {
-                key: 'group',
-                type: 'select',
-                box: {
-                    size: '3/6',
-                    lable: '分组:',
-                },
-                // "default": null,
-                element: {
-                    data: 'OptionSide:groupType',
-                    verify: {
-                        text: '分组:',
-                        rules: 'notNull'
-                    },
-                    placeholder: '- 请选择分组 -',
-                },
-            },
-            {
                 key: 'userRole',
                 type: 'select',
                 box: {
@@ -111,7 +113,7 @@ define (function (require, exports, module) {
                     className: '',
                 },
                 element: {
-                    // data: 'OptionSide:userRoleType',
+                    data: 'OptionSide:staffAndUserRoleType',
                     verify: {
                         text: '角色',
                         rules: 'notNull'
@@ -205,30 +207,26 @@ define (function (require, exports, module) {
         userForm.items.userCity.onChange(function () {
             userForm.items.userArea.setData(this.valueData.list);
         });
-        //分组职业二级联动
-        userForm.items.group.onChange(function (value) {
-            this.nameBox.click();//为了解决下拉栏不收回的蠢办法
-            if (value == 1) {
-                userForm.items.userRole.setData('OptionSide:staffRoleType');
-            } else {
-                userForm.items.userRole.setData('OptionSide:userRoleType');
-            }
-        });
         //邮箱自动补全
         // userForm.items.userEmail.html.autoMail({
         //     emails:['qq.com','163.com','126.com','sina.com','sohu.com','yahoo.cn','gmail.com','hotmail.com','live.cn']
         // });
-
+                
         content.append(userForm.html);
         var button = $('<div class="btn btn-info btn-block" id="submit">提交</div>');
         content.append(button);
+
+        //回车键绑定到提交按钮
+        $(document).keydown(function(event){ 
+            if(event.keyCode==13){ 
+                console.log("enter");
+                button.click(); 
+            } 
+        }); 
         //提交按钮的操作
         button.unbind().bind('click', function () {
             var dataToSend = userForm.get();
-            // //DEBUG
-            // console.log(dataToSend);
             if(dataToSend){
-                // console.log(DevUI.formatDate("-",dataToSend.userBirthday));
                 service.createUser ({
                     userName: dataToSend.userName,
                     userPassword: dataToSend.userPassword,
@@ -236,6 +234,8 @@ define (function (require, exports, module) {
                     userGender: dataToSend.userGender,
                     group: dataToSend.group,
                     userRole: dataToSend.userRole,
+                    userPhone: dataToSend.userPhone,
+                    //生日日其格式需要转换
                     userBirthday: DevUI.formatDate("-",dataToSend.userBirthday),
                     userProvince: dataToSend.userProvince,
                     userCity: dataToSend.userCity,
