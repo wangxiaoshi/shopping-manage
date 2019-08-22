@@ -30,12 +30,13 @@ public class User {
     private Integer group;
     //用户角色
     private Integer userRole;
-    //用户生日  TODO: 日期格式
+    //用户生日
+    @JsonFormat(timezone = "GMT+8")
     private Date userBirthday;
     //用户注册时间
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss") //出参
     private Date userRegTime;
-    //
+    //用户上传的资源数量
     private Integer uploadSum;
     //用户省份
     private String userProvince;
