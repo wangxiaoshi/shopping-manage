@@ -1,23 +1,25 @@
 define(function (require, exports, module) {
     _request.develop.urlList['202'] = 'http://127.0.0.1:8080/boot';
 
-    //动态获取当前角色列表
+    //动态获取当前角色列表, 限制在只能登录状态下获取
     var staffAndUserRoleType = [];
-    _request.POST({
-        type: 'POST',
-        url : '/role/list',
-        data : {},
-        devUrl: '202',
-        loading : true,
-        success : function (res) {  
-            // console.log(res);
-            for (let index = 0; index < res.list.length; index++) {
-                // console.log(1);
-                staffAndUserRoleType.push({label: (res.list)[index].roleName, value: (res.list)[index].roleID});
-            }
-            // console.log(staffAndUserRoleType);
-        },
-    })
+    if (_storage.get('token')) {
+        _request.POST({
+            type: 'POST',
+            url : '/role/list',
+            data : {},
+            devUrl: '202',
+            loading : true,
+            success : function (res) {  
+                // console.log(res);
+                for (let index = 0; index < res.list.length; index++) {
+                    // console.log(1);
+                    staffAndUserRoleType.push({label: (res.list)[index].roleName, value: (res.list)[index].roleID});
+                }
+                // console.log(staffAndUserRoleType);
+            },
+        })
+    }
 
     DevUI.options.set({
         staffAndUserRoleType,

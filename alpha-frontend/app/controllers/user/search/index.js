@@ -142,7 +142,10 @@ define (function (require, exports, module) {
                 },{
                     name: '删除',
                     event: function(data, element,event) {
-
+                        permList = _storage.get('permissionList');
+                        if(permList.indexOf('user_delete') <= -1){
+                            element.css('display', 'none');
+                        }
                     },
                     click: function (data, element) {
                         _alert.delete({

@@ -133,6 +133,11 @@ define(function (require, exports, module) {
                     _alert.success({
                         title: '修改成功',
                             callback: function (success) {
+                                //r如果修改了本身角色的权限, 将强制登出要求重新登录
+                                if (oldData.roleID == _storage.get('PermissionRole')) {
+                                    var logOutButton
+                                    (document.getElementById('logOutButton')).click();
+                                }
                                 location.reload();
                             }
                     })

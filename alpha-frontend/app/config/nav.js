@@ -8,7 +8,7 @@ define(function (require, exports, module) {
         'name': '权限管理',
         'router': '/permissionGroup',
         'icon': 'fa-unlock',
-        'permission': 'permissionGroup',
+        'permission': 'index',
     },{
         'name': '用户管理',
         'router': '/user',

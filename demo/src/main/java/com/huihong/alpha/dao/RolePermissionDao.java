@@ -56,7 +56,7 @@ public interface RolePermissionDao {
     List<RolePermission> getRolePermissionByRoleID(Long roleID);
 
     /**
-     * TODO: 使用中, 待测验
+     * TODO: 使用中
      * @Description:根据角色id查询指定角色的权限名字列表, 以便userDetailService使用
      * @param roleID
      * @return
@@ -66,15 +66,6 @@ public interface RolePermissionDao {
             " WHERE rp.role_id = #{roleID} AND rp.permission_id = p.permission_id ")
     List<String> getPermissionListByRoleID(Long roleID);
 
-//    /**
-//     * TODO: 动态权限备用
-//     * @Description:查询角色权限列表
-//     * @param:  RolePermission
-//     */
-//    @Select("SELECT role_id,"+
-//            "       permission_id"+
-//            "  FROM ROLE_PERMISSION")
-//    List<RolePermission> getRolePermissionList();
 
     /**
      * TODO:使用中

@@ -61,6 +61,12 @@ public class RolePermissionService {
         rolePermissionDao.deleteRolePermissionByRoleID(roleID);
     }
 
-
-
+    /**
+     * @Description:通过角色id查询所对应的权限名列表
+     * @param roleID
+     * @return
+     */
+    public List<String> getPermissionNameListByRoleID(Long roleID) {
+        return rolePermissionDao.getPermissionListByRoleID(roleID);
+    }
 }

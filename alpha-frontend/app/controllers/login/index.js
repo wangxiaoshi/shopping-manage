@@ -8,7 +8,7 @@ define(function (require, exports, module) {
 
         var userName = $('<input type="text" class="userName" placeholder="用户名"/>');
         var userPassword = $('<input type="password" class="userPassword" placeholder="密码"/>');
-        var loginButton = $('<div class="loginButton" >登&nbsp;录</div>');
+        var loginButton = $('<div class="loginButton" id="loginButton">登&nbsp;录</div>');
 
         loginBox.append(loginTitle);
         loginBox.append(userName);
@@ -41,18 +41,17 @@ define(function (require, exports, module) {
                 userPassword: userPassword.val()
             };
             service.login(postdata, function (result) {
-                
-                console.log(result);
+                // console.log(result);
                 _storage.clear();
                 _storage.set('token', result.token);
                 permission.initPermission(result.roleID);
-                _storage.remove('PermissionRole');
                 _storage.set('PermissionRole', result.roleID);
-                // _storage.set('name', result.name);
+                _storage.set('userName', result.userName);
+                _storage.set('permissionList', result.permList);
                 // _storage.set('userId', result.userId);
                 // permission.initPermission(result.roleId);
                 location.href = './index.html#/index'; 
-                location.reload();
+                // location.reload();
             })
 
         });

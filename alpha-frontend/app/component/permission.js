@@ -4,16 +4,19 @@ define(function (require, exports, module) {
 
     //动态获取当前权限状态   FIXME: 在其他页面会出现ajax空参数错误
     var getPermissionListByRoleID = function (data, callback) {
-        _request.POST({
-            type: 'POST',
-            url : '/role/permission/' + data,
-            data : data,
-            devUrl: '202',
-            loading : true,
-            success : function (res) {
-                callback(res);
-            },
-        })
+        if (_storage.get('token')) {
+            _request.POST({
+                type: 'POST',
+                url : '/role/permission/' + data,
+                data : data,
+                devUrl: '202',
+                loading : true,
+                success : function (res) {
+                    callback(res);
+                },
+            })
+        }
+        
     }
 
     //该表应与permissionGroup/premissionlist保持同步!!!

@@ -1,7 +1,9 @@
 package com.huihong.alpha.controller;
 
 import com.huihong.alpha.dao.RolePermissionDao;
+import com.huihong.alpha.model.RolePermission;
 import com.huihong.alpha.model.User;
+import com.huihong.alpha.service.RolePermissionService;
 import com.huihong.alpha.service.UserRoleService;
 import com.huihong.alpha.util.Constant;
 import com.huihong.alpha.util.JwtTokenUtil;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -28,6 +32,8 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UserRoleService userRoleService;
+    @Autowired
+    private RolePermissionService rolePermissionService;
 
     /**
      * @Description: 处理登录请求, 验证成功向浏览器发送token
@@ -50,12 +56,16 @@ public class AuthController {
 
         //获取用户的角色id
         Long roleID = userRoleService.getRoleByUserName(user.getUserName());
-//        list = rolePermissionDao.getPermissionListByRoleID(roleID);
+        List<String> list = new ArrayList<String>();
+        list = rolePermissionService.getPermissionNameListByRoleID(roleID);
 
 //        System.out.println("生成token:" + token);
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("token", token);
         map.put("roleID", roleID);
+        map.put("userName", userName);
+        map.put("permList", list);
+//        map.put("userID", )
 
         //TODO: token中传递权限 (已在userDetailsService中实现)
 //        map.put("permissionList", )
